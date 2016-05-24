@@ -1,0 +1,138 @@
+html{
+    overflow-y: scroll; 
+}
+h2{
+  display: inline-block;
+}
+h2 i:first-child{
+  margin-left: 15px; 
+}
+form.novalinha{
+  display: inline-flex;
+}
+div.all{
+  padding-top: 50px;
+  width: 520px;
+  display: table;
+  margin: 0 auto;
+}
+.btn-group-lg>.btn, .btn-lg{
+  width: 116px;
+}
+h2{
+  text-align: center;
+}
+div.select-linhas select{
+  height: 46px;
+  vertical-align: middle;
+  font-size: 22px;
+  width: 400px;
+  padding-left: 5px;
+}
+div.select-linhas option{
+}
+div.radio-dias{
+  display: inline-flex;
+  padding-left: 4px;
+}
+div.radio-dias label{
+  padding: 0 90px 0 2px;
+}
+div.dias{
+  width: 100%;
+  text-align: center;
+}
+div.dias input[type="radio"]{
+  display: none;
+}
+div.dias label{
+  margin: 0 55px;
+}
+div.dias label:hover{
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+div.horario{
+  text-align: center;
+  width: 100%;
+  display: inline-flex;
+}
+div.horario i{
+  font-size: 15px;
+  color: darkblue;
+  margin: 0 1px;
+
+}
+div.horario i.accessible{
+  margin: 0 6px;
+}
+div.box{
+  text-align: center;
+  width: 100%;
+  display: none;
+  margin-top: 10px;
+}
+
+div.dia:target {
+  display: block;
+}
+
+.chkbox1:checked ~ div.horario div.box#chkbox1,
+  .chkbox2:checked ~ div.horario div.box#chkbox2,
+    .chkbox3:checked ~ div.horario div.box#chkbox3{
+  display: block !important;
+}
+.chkbox1:checked + label,.chkbox2:checked + label,.chkbox3:checked + label{
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+.chkbox1,.chkbox2,.chkbox3{
+  background-color: #aaa;
+  color: black;
+  font-weight: normal;
+}
+div.turnos{
+  width: 100%;
+  display: inline-flex;
+}
+div.manha{
+  background-color: #FAF082;
+}
+div.tarde{
+  background-color: #31D652;
+}
+div.noite{
+  background-color: #7788E6;
+}
+div.manha, div.tarde, div.noite{
+  width: 33.333%;
+  display: block;
+}
+div.manha::before{
+  content: "Manhã\A";
+  white-space: pre;
+}
+div.tarde::before{
+  content: "Tarde\A";
+  white-space: pre;
+}
+div.noite::before{
+  content: 'Noite\A';
+  white-space: pre;
+}
+.nomelinha{
+  display: inline-block;
+  text-align: center;
+}
+.nomelinha h2{
+  float: left;
+  margin: 0 auto 15px 40px;
+}
+.nomelinha a:first-child{
+  margin-left: 15px;
+}
+.nomelinha i{
+  font-size: 22px;
+}
