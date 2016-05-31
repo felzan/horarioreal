@@ -1,10 +1,12 @@
-<?php   
+<?php
 require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['novalinha'])){
   $Novalinha = $_GET ['novalinha'];
+  $Novalinhaabr = $_GET ['novalinhaabr']; #abreviatura
 }else{
   $Novalinha = '';
+  $Novalinhaabr = '';
 }
 if(isset($_GET['ok'])){
   $Ok = $_GET ['ok'];
@@ -30,12 +32,12 @@ if(isset($_GET['ok'])){
     echo "<h2>Deseja incluir a linha ".$Novalinha." ?</h2><br>";
     ?>
       <a href="admin.php"><button type="button">< Voltar</button></a>
-      <a href="nova_linha.php?novalinha=<?php echo "$Novalinha"; ?>&ok=true"><button type="button">Incluir</button></a>
+      <a href="nova_linha.php?novalinha=<?php echo "$Novalinha"; ?>&novalinhaabr=<?php echo $Novalinhaabr; ?>&ok=true"><button type="button">Incluir</button></a>
 <?php
   }else{
-    mysqli_query($con,"INSERT into tlinha(Nome) Values ('$Novalinha')");
+    mysqli_query($con,"INSERT into tlinha(Nome,AbrLin) Values ('$Novalinha','$Novalinhaabr')");
     ?><h3>Inserido!</h3>
-      
+
       <a href="admin.php"><button type="button">< Voltar</button></a>
     <?php
   }
