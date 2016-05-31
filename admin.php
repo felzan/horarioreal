@@ -55,7 +55,7 @@ if(isset($_GET['novonome'])){
 
         #Mostra nome da linha
         $resultado = mysqli_query($con,"SELECT Nome FROM tlinha where CodLin = '$Linha';");
-        
+
         while ($linha = mysqli_fetch_array($resultado)){
           $NomeLinha = $linha["Nome"];
           ?>
