@@ -120,7 +120,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p><a class="nsize" href="delete_tarifa.php?codtar=<?php echo $CodTar; ?>&del=false">X</a> | <a class="nsize" href="admin.php">D</a></p>
+                        <p><a class="nsize" href="delete_tarifa.php?codtar=<?php echo $CodTar; ?>&del=false">X</a> | <a class="nsize" href="edita_tarifa.php?codtar=<?php echo $CodTar; ?>&ok=false">D</a></p>
                       </td>
                       <td>
                         <p><?php echo $CodEmp; ?></p>

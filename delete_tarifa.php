@@ -30,9 +30,9 @@ if(isset($_GET['del'])){
     <br>
 <?php
 global $CodLin;
-  if($Del == "false"){
+  if($Del == 'false'){
 
-    $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodTar = '$CodTar';");
+    $resultado = mysqli_query($con,"SELECT * FROM ttarifa WHERE CodTar = '$CodTar';");
       while ($linha = mysqli_fetch_array($resultado)){
         $CodTar = $linha["CodTar"];
         $Nome = $linha["Nome"];
@@ -40,18 +40,14 @@ global $CodLin;
         $Preco = $linha["Preco"];
 
         echo "<p>Deseja deletar a tarifa <b>$Nome</b> da empresa <b>$CodEmp</b>, com o preço de <b>$Preco</b></p>";
-        echo "<a href=\"delete_linha.php?codtar=$CodLin&del=true\"><button type=\"button\">DELETAR</button></a>";
-        echo "<a href=\"admin.php?linha=$CodLin\"><button type=\"button\">< Voltar</button></a>";
+        echo "<a href=\"delete_tarifa.php?codtar=$CodTar&del=true\"><button type=\"button\">DELETAR</button></a>";
+        echo "<a href=\"panel.php?menu=3\"><button type=\"button\">< Voltar</button></a>";
       }
   }else{
-    $resultado = mysqli_query($con,"SELECT * FROM tlinha WHERE CodLin = '$CodLin';");
-      while ($linha = mysqli_fetch_array($resultado)){
-        $Nome = $linha["Nome"];
-      }
-    mysqli_query($con,"DELETE FROM tlinha WHERE CodLin = '$CodLin';");
-    mysqli_query($con,"DELETE FROM thorario WHERE CodLin = '$CodLin';");
-    ?><h3>Excluído!</h3>
-      <a href="admin.php"><button type="button">< Voltar</button></a>
+    mysqli_query($con,"DELETE FROM ttarifa WHERE CodTar = '$CodTar';");
+    ?>
+      <h3>Excluído!</h3>
+      <a href="panel.php"><button type="button">< Voltar</button></a>
     <?php
   }
     ?>
