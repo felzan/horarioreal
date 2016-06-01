@@ -1,4 +1,4 @@
-<?php   
+<?php
 require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['linha'])){
@@ -54,15 +54,18 @@ if(isset($_GET['novonome'])){
         echo "<div class=\"nomelinha\">";
 
         #Mostra nome da linha
-        $resultado = mysqli_query($con,"SELECT Nome FROM tlinha where CodLin = '$Linha';");
+        $resultado = mysqli_query($con,"SELECT * FROM tlinha where CodLin = '$Linha';");
 
         while ($linha = mysqli_fetch_array($resultado)){
           $NomeLinha = $linha["Nome"];
+          $Linhaabr = $linha["AbrLin"];
           ?>
           <h2>
             <form class="novalinha" action="admin.php" method="get" accept-charset="utf-8">
-              <input type="hidden" name="novonomelinha" value="<?php echo $Linha; ?>">
-              <input type="text" name="novonome" class="linhaoculta" value="<?php echo $NomeLinha; ?>">
+              <input type="hidden"name="novonomelinha" value="<?php echo $Linha; ?>">
+              <input type="text" style="width:300px;" name="novonome" class="linhaoculta" value="<?php echo $NomeLinha; ?>">
+              <br>
+              <input type="text" style="width:100px;" name="novonomeabr" class="linhaoculta" value="<?php echo $Linhaabr; ?>">
               <input type="submit" name="" value="OK">
             <a class="delete" href="delete_linha.php?codlin=<?php echo $Linha; ?>&del=false"><i class="delete material-icons">delete_forever</i></a>
             </h2>
@@ -105,14 +108,14 @@ if(isset($_GET['novonome'])){
       <label for="chk3">Domingo</label>
 
       <div class="horario">
-            <?php
-              $manha = "04:00";
-              $Ameio = "11:59";
-              $meio = "12:00";
-              $Atarde = "17:59";
-              $tarde = "18:00";
-              $noite = "23:59";
-            ?>
+        <?php
+          $manha = "04:00";
+          $Ameio = "11:59";
+          $meio = "12:00";
+          $Atarde = "17:59";
+          $tarde = "18:00";
+          $noite = "23:59";
+        ?>
       <br>
         <div class="box" id="chkbox1">
           <div class="turnos">
