@@ -153,8 +153,10 @@ if(isset($_GET['menu'])){
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <span>Incluir: </span>
-                  <form class="novalinha" action="nova_tarifa.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="novatarifa" class="novatarifa" value="novatarifa">
+                  <form class="novalinha" action="novo_motorista.php" method="get" accept-charset="utf-8">
+                    <input type="text" name="nome" class="novatarifa" value="" placeholder="Nome">
+                    <input type="text" name="CPF" class="novatarifa" value="" placeholder="CPF">
+                    <input type="text" name="CNH" class="novatarifa" value="" placeholder="CNH">
                     <input type="submit" name="" value="OK">
                   </form>
                 </div>
@@ -162,25 +164,26 @@ if(isset($_GET['menu'])){
                   <table class="table">
 
                   <? #SELECIONA AS TARIFAS
-                  $resultado = mysqli_query($con,"SELECT CPF,Nome,CNH FROM tmotorista order by Nome DESC;");
+                  $resultado = mysqli_query($con,"SELECT * FROM tmotorista order by Nome DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CPF = $linha["CPF"];
+                    $CodMot = $linha["CodMot"];
                     $CNH = $linha["CNH"];
                     $Nome = $linha["Nome"];
                   ?>
 
                     <tr>
                       <td>
-                        <p>X | D</p>
+                        <p><a class="nsize" href="delete_motorista.php?codmot=<?php echo $CodMot; ?>&del=false">X</a> | <a class="nsize" href="edita_motorista.php?codmot=<?php echo $CodMot; ?>&ok=false">D</a></p>
+                      </td>
+                      <td>
+                        <p><?php echo $Nome; ?></p>
                       </td>
                       <td>
                         <p><?php echo $CPF; ?></p>
                       </td>
                       <td>
                         <p><?php echo $CNH; ?></p>
-                      </td>
-                      <td>
-                        <p><?php echo $Nome; ?></p>
                       </td>
                     </tr>
 
@@ -200,8 +203,11 @@ if(isset($_GET['menu'])){
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <span>Incluir: </span>
-                  <form class="novalinha" action="nova_tarifa.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="novatarifa" class="novatarifa" value="novatarifa">
+                  <form class="novalinha" action="novo_bus.php" method="get" accept-charset="utf-8">
+                    <input type="text" name="placa" class="novatarifa" value="" placeholder="Placa">
+                    <input type="number" name="ano" class="novatarifa" value="" placeholder="Ano">
+                    <label>Elevador: </label><input type="checkbox" name="elevador" value="1">
+                    <label>Ar: </label><input type="checkbox" name="ar" value="1">
                     <input type="submit" name="" value="OK">
                   </form>
                 </div>
@@ -220,7 +226,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p>X | D</p>
+                        <p><a class="nsize" href="delete_bus.php?codbus=<?php echo $CodBus; ?>&del=false">X</a> | <a class="nsize" href="edita_bus.php?codbus=<?php echo $CodBus; ?>&ok=false">D</a></p>
                       </td>
                       <td>
                         <p><?php echo $Placa; ?></p>
