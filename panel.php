@@ -257,8 +257,8 @@ if(isset($_GET['menu'])){
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <span>Incluir: </span>
-                  <form class="novalinha" action="nova_tarifa.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="novatarifa" class="novatarifa" value="novatarifa">
+                  <form class="novalinha" action="nova_empresa.php" method="get" accept-charset="utf-8">
+                    <input type="text" name="novaemp" class="novatarifa" value="" placeholder="Nome da empresa">
                     <input type="submit" name="" value="OK">
                   </form>
                 </div>
@@ -274,7 +274,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p>X | D</p>
+                        <p><a class="nsize" href="delete_empresa.php?codemp=<?php echo $CodEmp; ?>&del=false">X</a> | <a class="nsize" href="edita_empresa.php?codemp=<?php echo $CodEmp; ?>&ok=false">D</a></p>
                       </td>
                       <td>
                         <p><?php echo $CodEmp; ?></p>
@@ -294,13 +294,13 @@ if(isset($_GET['menu'])){
             break;
             case 8:
             ?>
-              <h3 class="">Manuteção de ônibus</h3>
+              <h3 class="">Manuteção de cidades</h3>
 
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <span>Incluir: </span>
-                  <form class="novalinha" action="nova_tarifa.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="novatarifa" class="novatarifa" value="novatarifa">
+                  <form class="novalinha" action="nova_cidade.php" method="get" accept-charset="utf-8">
+                    <input type="text" name="novacidade" class="novatarifa" value="" placeholder="Nome da cidade">
                     <input type="submit" name="" value="OK">
                   </form>
                 </div>
@@ -308,7 +308,7 @@ if(isset($_GET['menu'])){
                   <table class="table">
 
                   <? #SELECIONA AS TARIFAS
-                  $resultado = mysqli_query($con,"SELECT CodCid,Nome FROM tcidade order by CodCid DESC;");
+                  $resultado = mysqli_query($con,"SELECT * FROM tcidade order by CodCid DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodCid = $linha["CodCid"];
                     $Nome = $linha["Nome"];
@@ -316,7 +316,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p>X | D</p>
+                        <p><a class="nsize" href="delete_cidade.php?codcid=<?php echo $CodCid; ?>&del=false">X</a> | <a class="nsize" href="edita_cidade.php?codcid=<?php echo $CodCid; ?>&ok=false">D</a></p>
                       </td>
                       <td>
                         <p><?php echo $CodCid; ?></p>
