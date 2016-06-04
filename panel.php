@@ -57,7 +57,17 @@ if(isset($_GET['menu'])){
               </div>
 
                 <table class="table">
-
+                  <tr>
+                    <td>
+                      [engrenagem]
+                    </td>
+                    <td>
+                      Linha
+                    </td>
+                    <td>
+                      Abreviatura
+                    </td>
+                  </tr>
                 <? #SELECIONA AS LINHAS
                 $resultado = mysqli_query($con,"SELECT CodLin,AbrLin,Nome FROM tlinha order by Nome;");
                 while ($linha = mysqli_fetch_array($resultado)){
@@ -108,7 +118,20 @@ if(isset($_GET['menu'])){
                 </div>
 
                   <table class="table">
-
+                    <tr>
+                      <td>
+                        [engrenagem]
+                      </td>
+                      <td>
+                        Empresa
+                      </td>
+                      <td>
+                        Nome
+                      </td>
+                      <td>
+                        Preço
+                      </td>
+                    </tr>
                   <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodTar,CodEmp,Nome,Preco FROM ttarifa order by Preco DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
@@ -116,6 +139,10 @@ if(isset($_GET['menu'])){
                     $CodEmp = $linha["CodEmp"];
                     $Nome = $linha["Nome"];
                     $Preco = $linha["Preco"];
+
+                    $resultado2 = mysqli_query($con,"SELECT Nome FROM tempresa where CodEmp = '$CodEmp'");
+                    while ($linha2 = mysqli_fetch_array($resultado2)){
+                      $NomeEmp = $linha2["Nome"];}
                   ?>
 
                     <tr>
@@ -123,7 +150,7 @@ if(isset($_GET['menu'])){
                         <p><a class="nsize" href="delete_tarifa.php?codtar=<?php echo $CodTar; ?>&del=false">X</a> | <a class="nsize" href="edita_tarifa.php?codtar=<?php echo $CodTar; ?>&ok=false">D</a></p>
                       </td>
                       <td>
-                        <p><?php echo $CodEmp; ?></p>
+                        <p><?php echo $NomeEmp; ?></p>
                       </td>
                       <td>
                         <p><?php echo $Nome; ?></p>
@@ -162,7 +189,20 @@ if(isset($_GET['menu'])){
                 </div>
 
                   <table class="table">
-
+                    <tr>
+                      <td>
+                        [engrenagem]
+                      </td>
+                      <td>
+                        Nome
+                      </td>
+                      <td>
+                        CPF
+                      </td>
+                      <td>
+                        CNH
+                      </td>
+                    </tr>
                   <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT * FROM tmotorista order by Nome DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
@@ -213,7 +253,22 @@ if(isset($_GET['menu'])){
                 </div>
 
                   <table class="table">
-
+                      <td>
+                        [engrenagem]
+                      </td>
+                      <td>
+                        Placa
+                      </td>
+                      <td>
+                        Ano
+                      </td>
+                      <td>
+                        Elevador
+                      </td>
+                      <td>
+                        Ar
+                      </td>
+                    </tr>
                   <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodBus,Ano,Placa,Elevador,Ar FROM tonibus order by CodBus DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
@@ -235,10 +290,10 @@ if(isset($_GET['menu'])){
                         <p><?php echo $Ano; ?></p>
                       </td>
                       <td>
-                        <p><?php echo $Elevador; ?></p>
+                        <p><?php if($Elevador){echo "Sim";}else{echo "Não";} ?></p>
                       </td>
                       <td>
-                        <p><?php echo $Ar; ?></p>
+                        <p><?php if($Ar){echo "Sim";}else{echo "Não";} ?></p>
                       </td>
                     </tr>
 
@@ -264,7 +319,16 @@ if(isset($_GET['menu'])){
                 </div>
 
                   <table class="table">
-
+                      <td>
+                        [engrenagem]
+                      </td>
+                      <td>
+                        Cód. empresa
+                      </td>
+                      <td>
+                        Nome
+                      </td>
+                    </tr>
                   <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodEmp,Nome FROM tempresa order by CodEmp DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
@@ -306,14 +370,23 @@ if(isset($_GET['menu'])){
                 </div>
 
                   <table class="table">
-
+                    <tr>
+                      <td>
+                        [engrenagem]
+                      </td>
+                      <td>
+                        Cód. cidade
+                      </td>
+                      <td>
+                        Nome
+                      </td>
+                    </tr>
                   <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT * FROM tcidade order by CodCid DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodCid = $linha["CodCid"];
                     $Nome = $linha["Nome"];
                   ?>
-
                     <tr>
                       <td>
                         <p><a class="nsize" href="delete_cidade.php?codcid=<?php echo $CodCid; ?>&del=false">X</a> | <a class="nsize" href="edita_cidade.php?codcid=<?php echo $CodCid; ?>&ok=false">D</a></p>

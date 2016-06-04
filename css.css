@@ -161,3 +161,6 @@ input{
 .nsize{
   font-size: 16px !important;
 }
+table.table tr:first-child{
+  font-weight: bold;
+}
