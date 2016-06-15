@@ -65,10 +65,10 @@ if(isset($_GET['menu'])){
                       Linha
                     </td>
                     <td>
-                      Abreviatura
+                    Abreviatura
                     </td>
                   </tr>
-                <? #SELECIONA AS LINHAS
+                <?php #SELECIONA AS LINHAS
                 $resultado = mysqli_query($con,"SELECT CodLin,AbrLin,Nome FROM tlinha order by Nome;");
                 while ($linha = mysqli_fetch_array($resultado)){
                   $CodLin = $linha["CodLin"];
@@ -78,7 +78,7 @@ if(isset($_GET['menu'])){
 
                   <tr>
                     <td>
-                      <p><a class="nsize" href="delete_linha.php?codlin=<?php echo $CodLin; ?>&del=false">X</a> | <a class="nsize" href="admin.php?linha=<?php echo $CodLin; ?>">D</a></p>
+                      <p><a class="nsize" href="delete_linha.php?codlin=<?php echo "$CodLin"; ?>&del=false">X</a> | <a class="nsize" href="admin.php?linha=<?php echo $CodLin; ?>">D</a></p>
                     </td>
                     <td>
                       <p><?php echo "$Nome"; ?></p>
@@ -132,7 +132,7 @@ if(isset($_GET['menu'])){
                         Preço
                       </td>
                     </tr>
-                  <? #SELECIONA AS TARIFAS
+                  <?php #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodTar,CodEmp,Nome,Preco FROM ttarifa order by Preco DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodTar = $linha["CodTar"];
@@ -203,7 +203,7 @@ if(isset($_GET['menu'])){
                         CNH
                       </td>
                     </tr>
-                  <? #SELECIONA AS TARIFAS
+                  <?php #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT * FROM tmotorista order by Nome DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CPF = $linha["CPF"];
@@ -269,7 +269,7 @@ if(isset($_GET['menu'])){
                         Ar
                       </td>
                     </tr>
-                  <? #SELECIONA AS TARIFAS
+                  <?php #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodBus,Ano,Placa,Elevador,Ar FROM tonibus order by CodBus DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodBus = $linha["CodBus"];
@@ -329,7 +329,7 @@ if(isset($_GET['menu'])){
                         Nome
                       </td>
                     </tr>
-                  <? #SELECIONA AS TARIFAS
+                  <?php #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodEmp,Nome FROM tempresa order by CodEmp DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodEmp = $linha["CodEmp"];
@@ -381,7 +381,7 @@ if(isset($_GET['menu'])){
                         Nome
                       </td>
                     </tr>
-                  <? #SELECIONA AS TARIFAS
+                  <?php #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT * FROM tcidade order by CodCid DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodCid = $linha["CodCid"];

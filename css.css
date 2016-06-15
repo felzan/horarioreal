@@ -164,3 +164,6 @@ input{
 table.table tr:first-child{
   font-weight: bold;
 }
+.nav:target>li>a{
+  transform: scale(1.2);
+}

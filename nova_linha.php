@@ -3,9 +3,12 @@ require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['novalinha'])){
   $Novalinha = $_GET ['novalinha'];
-  $Novalinhaabr = $_GET ['novalinhaabr']; #abreviatura
 }else{
   $Novalinha = '';
+}
+if(isset($_GET['novalinhaabr'])){
+  $Novalinhaabr = $_GET ['novalinhaabr'];
+}else{
   $Novalinhaabr = '';
 }
 if(isset($_GET['ok'])){
