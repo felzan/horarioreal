@@ -24,9 +24,12 @@ if(isset($_GET['del'])){
   <link rel="stylesheet" type="text/css" href="css.css">
   <title>Ônibus</title>
 </head>
-<body>
-  <div class="all">
-    <h2>Admin</h2>
+    <body>
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo</h2>
+    </div>
+        <div class="select-linhas">
     <br>
 <?php
   if($Del == 'false'){
@@ -36,7 +39,7 @@ if(isset($_GET['del'])){
         $CodMot = $linha["CodBus"];
         $Placa = $linha["Placa"];
         $Ano = $linha["Ano"];
-
+          
         echo "<p>Deseja deletar o ônibus de placa <b>$Placa</b> de ano:<b>$Ano</b>?</p>";
         echo "<a href=\"delete_bus.php?codbus=$CodBus&del=true\"><button type=\"button\">DELETAR</button></a>";
         echo "<a href=\"panel.php?menu=6\"><button type=\"button\">< Voltar</button></a>";
@@ -44,11 +47,15 @@ if(isset($_GET['del'])){
   }else{
     mysqli_query($con,"DELETE FROM tonibus WHERE CodBus = '$CodBus';");
     ?>
-      <h3>Excluído!</h3>
-      <a href="panel.php"><button type="button">< Voltar</button></a>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Onibus exclúido com sucesso.
+    </div>
+        <a href="panel.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+      
     <?php
   }
     ?>
+        </div>
 </body>
 </html>
 <?php

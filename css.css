@@ -1,5 +1,22 @@
+
+div.tudo{
+    background: #EEEEE0;
+    text-align: center;
+}
 html{
+    background: #EEEEE0;
     overflow-y: scroll;
+}
+.none{
+  display: none !important;
+}
+div.img {
+    text-align: center;
+    background: #EEEEE0;
+    margin: 15px;
+}
+div.bg{
+    background: #EEEEE0;
 }
 h2{
   display: inline-block;
@@ -7,10 +24,12 @@ h2{
 h2 i:first-child{
   margin-left: 15px;
 }
+
 form.novalinha{
   display: inline-flex;
 }
 div.all{
+  background: #EEEEE0;
   padding-top: 50px;
   width: 520px;
   display: table;
@@ -22,9 +41,6 @@ div.blank-space{
   border-bottom: 1px solid #eee;
   margin-bottom: 6px;
 }
-.btn-group-lg>.btn, .btn-lg{
-  width: 116px;
-}
 h2{
   text-align: center;
 }
@@ -35,8 +51,11 @@ div.select-linhas select{
   width: 400px;
   padding-left: 5px;
 }
-div.select-linhas option{
+div.select-linhas button{
+    color: white;
+    background: #8B7D6B;
 }
+
 div.radio-dias{
   display: inline-flex;
   padding-left: 4px;
@@ -46,16 +65,16 @@ div.radio-dias label{
 }
 div.dias{
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 div.dias input[type="radio"]{
   display: none;
 }
 div.dias label{
-  margin: 0 55px;
+  margin: 0 2px;
 }
 div.dias label:hover{
-  background-color: blue;
+  background-color: #8B7D6B;
   color: white;
   font-weight: bold;
 }
@@ -76,7 +95,6 @@ div.horario i.accessible{
 div.box{
   text-align: center;
   width: 100%;
-  display: none;
   margin-top: 10px;
 }
 
@@ -90,7 +108,7 @@ div.dia:target {
   display: block !important;
 }
 .chkbox1:checked + label,.chkbox2:checked + label,.chkbox3:checked + label{
-  background-color: blue;
+  background-color: #8B7D6B;
   color: white;
   font-weight: bold;
 }
@@ -104,13 +122,13 @@ div.turnos{
   display: inline-flex;
 }
 div.manha{
-  background-color: #FAF082;
+  background-color: #DCDCDC;
 }
 div.tarde{
-  background-color: #31D652;
+  background-color: #CDCDC1;
 }
 div.noite{
-  background-color: #7788E6;
+  background-color: #8B8B83;
 }
 div.manha, div.tarde, div.noite{
   width: 33.333%;
@@ -124,6 +142,12 @@ div.tarde::before{
   content: "Tarde\A";
   white-space: pre;
 }
+.textos{
+text-align: left;
+font-weight: bold;
+color: #8B7D7B;
+
+}
 div.noite::before{
   content: 'Noite\A';
   white-space: pre;
@@ -131,6 +155,10 @@ div.noite::before{
 .nomelinha{
   display: inline-block;
   text-align: center;
+}
+.panel-heading {
+    padding: 1%;
+    height: 57px;
 }
 .nomelinha h2{
   float: left;
@@ -150,7 +178,7 @@ div.noite::before{
 }
 .table tr td{
   padding: 8px 0 0 10px;
-  background-color: yellow;
+  background-color: #D6D6D6;
 }
 p{
   margin: 0;
@@ -163,7 +191,4 @@ input{
 }
 table.table tr:first-child{
   font-weight: bold;
-}
-.nav:target>li>a{
-  transform: scale(1.2);
 }

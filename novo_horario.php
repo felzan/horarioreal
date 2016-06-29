@@ -1,10 +1,15 @@
-<?php   
+<?php
 require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['novohorario'])){
   $Novohorario = $_GET ['novohorario'];
 }else{
   $Novohorario = '';
+}
+if(isset($_GET['elevador'])){
+  $Elevador = $_GET ['elevador'];
+}else{
+  $Elevador = '';
 }
 if(isset($_GET['dia'])){
   $Novohorario_dia = $_GET ['dia'];
@@ -33,20 +38,28 @@ if(isset($_GET['ok'])){
   <title>Cadastro: <?php echo "$Novalinha"; ?></title>
 </head>
 <body>
-  <div class="all">
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo - Horários</h2>
+    </div>
     <br>
+    <div class="select-linhas">
 <?php
   if($Ok == ""){
-    echo "<h2>Deseja incluir o horário $Novohorario no dia $Novohorario_dia na linha $Novohorario_linha ?</h2><br>";
+    echo "<p <b>Deseja incluir o horário $Novohorario no dia $Novohorario_dia na linha $Novohorario_linha ?</b></p><br>";
     ?>
-      <a href="admin.php"><button type="button">< Voltar</button></a>
-      <a href="novo_horario.php?linha=<?php echo "$Novohorario_linha"; ?>&novohorario=<?php echo "$Novohorario"; ?>&dia=<?php echo "$Novohorario_dia"; ?>&ok=true"><button type="button">Incluir</button></a>
+      <a href="admin.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+      <a href="novo_horario.php?linha=<?php echo "$Novohorario_linha"; ?>&novohorario=<?php echo "$Novohorario"; ?>&dia=<?php echo "$Novohorario_dia"; ?>&elevador=<?php echo "$Elevador"; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button></a>
 <?php
   }else{
-    mysqli_query($con,"INSERT into thorario(Horario, CodDia, CodLin) Values ('$Novohorario','$Novohorario_dia','$Novohorario_linha')");
-    ?><h3>Inserido!</h3>
-      
-      <a href="admin.php?linha=<?php echo "$Novohorario_linha"; ?>"><button type="button">< Voltar</button></a>
+    mysqli_query($con,"INSERT into thorario(Horario, CodDia, CodLin, Elevador) Values ('$Novohorario','$Novohorario_dia','$Novohorario_linha', '$Elevador')");
+    ?>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Linha incluida com sucesso.
+    </div>
+
+      <a href="admin.php?linha=<?php echo "$Novohorario_linha"; ?>"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+
     <?php
   }
     ?>

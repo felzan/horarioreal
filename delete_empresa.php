@@ -25,8 +25,12 @@ if(isset($_GET['del'])){
   <title>Horário</title>
 </head>
 <body>
-  <div class="all">
-    <h2>Admin</h2>
+  <body>
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo</h2>
+    </div>
+        <div class="select-linhas">
     <br>
 <?php
   if($Del == 'false'){
@@ -43,8 +47,10 @@ if(isset($_GET['del'])){
   }else{
     mysqli_query($con,"DELETE FROM tempresa WHERE CodEmp = '$CodEmp';");
     ?>
-      <h3>Excluído!</h3>
-      <a href="panel.php"><button type="button">< Voltar</button></a>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Empresa exclúida com sucesso.
+    </div>
+        <a href="panel.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
     <?php
   }
     ?>

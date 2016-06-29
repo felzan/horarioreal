@@ -65,7 +65,11 @@ if(isset($_GET['novoar'])){
   <title>Alterar tarifa</title>
 </head>
 <body>
-  <div class="all">
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo</h2>
+    </div>
+        <div class="select-linhas">
     <br>
 <?php
   if($Ok == 'false'){
@@ -98,9 +102,12 @@ if(isset($_GET['novoar'])){
   }
   }else{
     mysqli_query($con,"UPDATE tonibus SET Placa = '$NovaPlaca', Ano = '$NovoAno', Elevador = '$NovoElevador', Ar = '$NovoAr' WHERE CodBus = '$CodBus';");
-    ?><h3>Alterado!</h3>
-
-      <a href="panel.php?menu=6"><button type="button">< Voltar</button></a>
+    ?>      
+          <div class="alert alert-success">
+        <strong>Success!</strong> Ônibus alterado com sucesso. 
+    </div>
+        <a href="panel.php?menu=6"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+          
     <?php
   }
     ?>

@@ -19,6 +19,7 @@ if(isset($_GET['menu'])){
   <title>Painel administrativo</title>
 </head>
 <body>
+    <div class="bg">
   <div class="container-fluid">
     <div class="blank-space">
       <h2 class="">Painel administrativo</h2>
@@ -27,9 +28,9 @@ if(isset($_GET['menu'])){
       <div class="sidebar col-sm-3">
         <ul class="nav nav-sidebar">
           <li><a href="panel.php?menu=1">Linhas</a></li>
-          <li><a><del>Horários</del></a></li>
+          <li class="none"><a><del>Horários</del></a></li>
           <li><a href="panel.php?menu=3">Tarifas</a></li>
-          <li><a href="panel.php?menu=4">Tabelas</a></li>
+          <li class="none"><a href="panel.php?menu=4">Tabelas</a></li>
           <li><a href="panel.php?menu=5">Motoristas</a></li>
           <li><a href="panel.php?menu=6">Ônibus</a></li>
           <li><a href="panel.php?menu=7">Empresas</a></li>
@@ -49,26 +50,32 @@ if(isset($_GET['menu'])){
                 <span>Incluir: </span>
 
 
-                <form class="novalinha" action="nova_linha.php" method="get" accept-charset="utf-8">
-                  <input type="text" name="novalinha" class="" value="" placeholder="Nome da linha">
-                  <input type="text" name="novalinhaabr" class="" value="" placeholder="Abreviatura da linha">
-                  <input type="submit" name="" value="OK">
+                    <form class="novalinha" action="nova_linha.php" method="get" accept-charset="utf-8">
+
+    <div class="form-group"><input type="text" name="novalinha" placeholder="Nome da linha"class="form-control" id="usr"></div>&nbsp&nbsp
+
+    <div class="form-group"><input type="text" name="novalinhaabr" placeholder="Abreviatura da linha" class="form-control" id="usr">
+    </div>&nbsp&nbsp
+
+         <div class="form-group"><input type="submit" name="Ok" value="OK" class="form-control" id="usr">
+</div>
                 </form>
               </div>
 
                 <table class="table">
                   <tr>
                     <td>
-                      [engrenagem]
+<span class="glyphicon glyphicon-cog"></span>
+
                     </td>
                     <td>
-                      Linha
+                      Linhas
                     </td>
                     <td>
-                    Abreviatura
+                      Abreviaturas
                     </td>
                   </tr>
-                <?php #SELECIONA AS LINHAS
+                <? #SELECIONA AS LINHAS
                 $resultado = mysqli_query($con,"SELECT CodLin,AbrLin,Nome FROM tlinha order by Nome;");
                 while ($linha = mysqli_fetch_array($resultado)){
                   $CodLin = $linha["CodLin"];
@@ -78,7 +85,7 @@ if(isset($_GET['menu'])){
 
                   <tr>
                     <td>
-                      <p><a class="nsize" href="delete_linha.php?codlin=<?php echo "$CodLin"; ?>&del=false">X</a> | <a class="nsize" href="admin.php?linha=<?php echo $CodLin; ?>">D</a></p>
+                      <p><a class="nsize" href="delete_linha.php?codlin=<?php echo $CodLin; ?>&del=false"><span class="glyphicon glyphicon-trash"></span></a> | <a class="nsize" href="admin.php?linha=<?php echo $CodLin; ?>"><span class="glyphicon glyphicon-edit"></span></a></p>
                     </td>
                     <td>
                       <p><?php echo "$Nome"; ?></p>
@@ -110,20 +117,27 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="nova_tarifa.php" method="get" accept-charset="utf-8">
-                    <input type="number" min="0" style="width:135px;" name="novatarifaemp" class="novatarifa" value="" placeholder="Cód da empresa">
-                    <input type="text" name="novatarifa" class="novatarifa" value="" placeholder="Nome da tarifa">
-                    <input type="text" style="width:100px;" name="novatarifavalor" class="novatarifa" value="" placeholder="Valor">
-                    <input type="submit" name="" value="OK">
+                    <div class="form-group"><input type="text" name="novatarifaemp" placeholder="Cód da empresa"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                     <div class="form-group"><input type="text" name="novatarifa" placeholder="Nome da tarifa"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                    <div class="form-group"><input type="text" name="novatarifavalor"placeholder="Valor"class="form-control" id="usr"></div>&nbsp&nbsp
+
+
+                     <div class="form-group"><input type="submit" value="OK"class="form-control" id="usr"></div>
                   </form>
                 </div>
 
                   <table class="table">
                     <tr>
                       <td>
-                        [engrenagem]
+                        <span class="glyphicon glyphicon-cog"></span>
                       </td>
                       <td>
                         Empresa
+                      </td>
+                      <td>
+                        Cód. Empresa
                       </td>
                       <td>
                         Nome
@@ -132,7 +146,7 @@ if(isset($_GET['menu'])){
                         Preço
                       </td>
                     </tr>
-                  <?php #SELECIONA AS TARIFAS
+                  <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodTar,CodEmp,Nome,Preco FROM ttarifa order by Preco DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodTar = $linha["CodTar"];
@@ -147,10 +161,13 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p><a class="nsize" href="delete_tarifa.php?codtar=<?php echo $CodTar; ?>&del=false">X</a> | <a class="nsize" href="edita_tarifa.php?codtar=<?php echo $CodTar; ?>&ok=false">D</a></p>
+                        <p><a class="nsize" href="delete_tarifa.php?codtar=<?php echo $CodTar; ?>&del=false"><span class="glyphicon glyphicon-trash"></span></a> | <a class="nsize" href="edita_tarifa.php?codtar=<?php echo $CodTar; ?>&ok=false"><span class="glyphicon glyphicon-edit"></span></a></p>
                       </td>
                       <td>
                         <p><?php echo $NomeEmp; ?></p>
+                      </td>
+                      <td>
+                        <p><?php echo $CodEmp; ?></p>
                       </td>
                       <td>
                         <p><?php echo $Nome; ?></p>
@@ -181,17 +198,20 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="novo_motorista.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="nome" class="novatarifa" value="" placeholder="Nome">
-                    <input type="text" name="CPF" class="novatarifa" value="" placeholder="CPF">
-                    <input type="text" name="CNH" class="novatarifa" value="" placeholder="CNH">
-                    <input type="submit" name="" value="OK">
+                    <div class="form-group"><input type="text" name="nome" placeholder="Nome"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                    <div class="form-group"><input type="text" name="CPF" placeholder="CPF"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                     <div class="form-group"><input type="text" name="CNH" placeholder="CNH"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                    <div class="form-group"><input type="submit" value="OK" class="form-control" id="usr"></div>
                   </form>
                 </div>
 
                   <table class="table">
                     <tr>
                       <td>
-                        [engrenagem]
+                        <span class="glyphicon glyphicon-cog"></span>
                       </td>
                       <td>
                         Nome
@@ -203,7 +223,7 @@ if(isset($_GET['menu'])){
                         CNH
                       </td>
                     </tr>
-                  <?php #SELECIONA AS TARIFAS
+                  <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT * FROM tmotorista order by Nome DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CPF = $linha["CPF"];
@@ -214,7 +234,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p><a class="nsize" href="delete_motorista.php?codmot=<?php echo $CodMot; ?>&del=false">X</a> | <a class="nsize" href="edita_motorista.php?codmot=<?php echo $CodMot; ?>&ok=false">D</a></p>
+                        <p><a class="nsize" href="delete_motorista.php?codmot=<?php echo $CodMot; ?>&del=false"><span class="glyphicon glyphicon-trash"></span></a> | <a class="nsize" href="edita_motorista.php?codmot=<?php echo $CodMot; ?>&ok=false"><span class="glyphicon glyphicon-edit"></span></a></p>
                       </td>
                       <td>
                         <p><?php echo $Nome; ?></p>
@@ -244,17 +264,21 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="novo_bus.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="placa" class="novatarifa" value="" placeholder="Placa">
-                    <input type="number" name="ano" class="novatarifa" value="" placeholder="Ano">
-                    <label>Elevador: </label><input type="checkbox" name="elevador" value="1">
-                    <label>Ar: </label><input type="checkbox" name="ar" value="1">
-                    <input type="submit" name="" value="OK">
+                      <div class="form-group"><input type="text" placeholder="Nome"class="form-control" id="usr"></div>&nbsp&nbsp
+
+        <div class="form-group"><input type="text" name="placa" placeholder="Placa"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                    <div class="form-group"><input type="number" name="ano" placeholder="Ano" class="form-control" id="usr"></div>&nbsp&nbsp
+
+<label>Elevador:&nbsp</label><input type="checkbox" name="elevador" value="1">&nbsp&nbsp
+                    <label>Ar:&nbsp</label><input type="checkbox" name="ar" value="1">&nbsp&nbsp
+                    <div class="form-group"><input type="submit" value="OK"class="form-control" id="usr"></div>
                   </form>
                 </div>
 
                   <table class="table">
                       <td>
-                        [engrenagem]
+                        <span class="glyphicon glyphicon-cog"></span>
                       </td>
                       <td>
                         Placa
@@ -269,7 +293,7 @@ if(isset($_GET['menu'])){
                         Ar
                       </td>
                     </tr>
-                  <?php #SELECIONA AS TARIFAS
+                  <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodBus,Ano,Placa,Elevador,Ar FROM tonibus order by CodBus DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodBus = $linha["CodBus"];
@@ -281,7 +305,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p><a class="nsize" href="delete_bus.php?codbus=<?php echo $CodBus; ?>&del=false">X</a> | <a class="nsize" href="edita_bus.php?codbus=<?php echo $CodBus; ?>&ok=false">D</a></p>
+                        <p><a class="nsize" href="delete_bus.php?codbus=<?php echo $CodBus; ?>&del=false"><span class="glyphicon glyphicon-trash"></span></a> | <a class="nsize" href="edita_bus.php?codbus=<?php echo $CodBus; ?>&ok=false"><span class="glyphicon glyphicon-edit"></span></a></p>
                       </td>
                       <td>
                         <p><?php echo $Placa; ?></p>
@@ -313,14 +337,16 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="nova_empresa.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="novaemp" class="novatarifa" value="" placeholder="Nome da empresa">
-                    <input type="submit" name="" value="OK">
+
+                    <div class="form-group"><input type="text" name="novaemp"    placeholder="Nome da empresa" class="form-control" id="usr"></div>&nbsp&nbsp
+
+                    <div class="form-group"><input type="submit" name="" value="OK"class="form-control" id="usr"></div>
                   </form>
                 </div>
 
                   <table class="table">
                       <td>
-                        [engrenagem]
+                        <span class="glyphicon glyphicon-cog"></span>
                       </td>
                       <td>
                         Cód. empresa
@@ -329,7 +355,7 @@ if(isset($_GET['menu'])){
                         Nome
                       </td>
                     </tr>
-                  <?php #SELECIONA AS TARIFAS
+                  <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT CodEmp,Nome FROM tempresa order by CodEmp DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodEmp = $linha["CodEmp"];
@@ -338,7 +364,7 @@ if(isset($_GET['menu'])){
 
                     <tr>
                       <td>
-                        <p><a class="nsize" href="delete_empresa.php?codemp=<?php echo $CodEmp; ?>&del=false">X</a> | <a class="nsize" href="edita_empresa.php?codemp=<?php echo $CodEmp; ?>&ok=false">D</a></p>
+                        <p><a class="nsize" href="delete_empresa.php?codemp=<?php echo $CodEmp; ?>&del=false"><span class="glyphicon glyphicon-trash"></span></a> | <a class="nsize" href="edita_empresa.php?codemp=<?php echo $CodEmp; ?>&ok=false"><span class="glyphicon glyphicon-edit"></span></a></p>
                       </td>
                       <td>
                         <p><?php echo $CodEmp; ?></p>
@@ -364,15 +390,17 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="nova_cidade.php" method="get" accept-charset="utf-8">
-                    <input type="text" name="novacidade" class="novatarifa" value="" placeholder="Nome da cidade">
-                    <input type="submit" name="" value="OK">
+
+                    <div class="form-group"><input type="text" name="novacidade" placeholder="Nome da cidade"class="form-control" id="usr"></div>&nbsp&nbsp
+
+                      <div class="form-group"><input type="submit" name="" value="OK" class="form-control" id="usr"></div>
                   </form>
                 </div>
 
                   <table class="table">
                     <tr>
                       <td>
-                        [engrenagem]
+        <span class="glyphicon glyphicon-cog"></span>
                       </td>
                       <td>
                         Cód. cidade
@@ -381,7 +409,7 @@ if(isset($_GET['menu'])){
                         Nome
                       </td>
                     </tr>
-                  <?php #SELECIONA AS TARIFAS
+                  <? #SELECIONA AS TARIFAS
                   $resultado = mysqli_query($con,"SELECT * FROM tcidade order by CodCid DESC;");
                   while ($linha = mysqli_fetch_array($resultado)){
                     $CodCid = $linha["CodCid"];
@@ -389,7 +417,7 @@ if(isset($_GET['menu'])){
                   ?>
                     <tr>
                       <td>
-                        <p><a class="nsize" href="delete_cidade.php?codcid=<?php echo $CodCid; ?>&del=false">X</a> | <a class="nsize" href="edita_cidade.php?codcid=<?php echo $CodCid; ?>&ok=false">D</a></p>
+                        <p><a class="nsize" href="delete_cidade.php?codcid=<?php echo $CodCid; ?>&del=false"><span class="glyphicon glyphicon-trash"></span></a> | <a class="nsize" href="edita_cidade.php?codcid=<?php echo $CodCid; ?>&ok=false"><span class="glyphicon glyphicon-edit"></span></a></p>
                       </td>
                       <td>
                         <p><?php echo $CodCid; ?></p>
@@ -417,7 +445,7 @@ if(isset($_GET['menu'])){
         </div>
     </div>
   </div>
-
+</div>
 
   <?php
   mysqli_close($con);

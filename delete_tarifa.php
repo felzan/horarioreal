@@ -25,8 +25,11 @@ if(isset($_GET['del'])){
   <title>Horário</title>
 </head>
 <body>
-  <div class="all">
-    <h2>Admin</h2>
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo</h2>
+    </div>
+        <div class="select-linhas">
     <br>
 <?php
 global $CodLin;
@@ -46,8 +49,10 @@ global $CodLin;
   }else{
     mysqli_query($con,"DELETE FROM ttarifa WHERE CodTar = '$CodTar';");
     ?>
-      <h3>Excluído!</h3>
-      <a href="panel.php"><button type="button">< Voltar</button></a>
+      <div class="alert alert-success">
+        <strong>Success!</strong> Tarefa exclúida com sucesso. 
+    </div>
+        <a href="panel.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
     <?php
   }
     ?>

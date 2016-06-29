@@ -23,23 +23,31 @@ if(isset($_GET['ok'])){
   <title>Cadastro: <?php echo "$Novalinha"; ?></title>
 </head>
 <body>
-  <div class="all">
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo - Horários</h2>
+    </div>
     <br>
+    <div class="select-linhas">
 <?php
   if($Ok == ''){
-    echo "<h2>Deseja incluir a empresa <b>$Novaemp</b>?</h2><br>";
+    echo "<p <b>Deseja incluir a empresa <b>$Novaemp</b>?</p><br>";
     ?>
-      <a href="panel.php?menu=7"><button type="button">< Voltar</button></a>
-      <a href="nova_empresa.php?novaemp=<?php echo "$Novaemp"; ?>&ok=true"><button type="button">Incluir</button></a>
+      <a href="panel.php?menu=7"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+      <a href="nova_empresa.php?novaemp=<?php echo "$Novaemp"; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button></a>
 <?php
   }else{
     mysqli_query($con,"INSERT into tempresa(Nome) Values ('$Novaemp')");
-    ?><h3>Inserido!</h3>
-
-      <a href="panel.php?menu=7"><button type="button">< Voltar</button></a>
+    ?>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Linha incluida com sucesso.
+    </div>
+      <a href="panel.php?menu=7"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
     <?php
   }
     ?>
+        </div>
+    </div>
 </body>
 </html>
 <?php

@@ -12,6 +12,11 @@ if(isset($_GET['newhorario'])){
 }else{
   $Newhorario = '';
 }
+if(isset($_GET['elevador'])){
+  $Elevador = $_GET ['elevador'];
+}else{
+  $Elevador = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +27,15 @@ if(isset($_GET['newhorario'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
-  <title>Horário</title>
+    <title>Painel administrativo - Horários</title>
 </head>
 <body>
-  <div class="all">
-    <h2>Admin</h2>
+<div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo - Horários</h2>
+    </div>
     <br>
+    <div class="select-linhas">
 <?php
 global $CodLin;
 global $CodDia;
@@ -35,13 +43,13 @@ global $Horario;
 global $Nome;
 global $DescDia;
   if($Newhorario == ''){
-
     $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodHor = '$CodHor';");
       while ($linha = mysqli_fetch_array($resultado)){
         $Horario = $linha["Horario"];
         $CodHor = $linha["CodHor"];
         $CodLin = $linha["CodLin"];
         $CodDia = $linha["CodDia"];
+        $Elevador = $linha["Elevador"];
       }
     $resultado = mysqli_query($con,"SELECT DescDia FROM tdia WHERE CodDia = '$CodDia';");
       while ($linha = mysqli_fetch_array($resultado)){
@@ -51,41 +59,53 @@ global $DescDia;
       while ($linha = mysqli_fetch_array($resultado)){
         $Nome = $linha["Nome"];
       }
-
-
     echo "<p>Deseja alterar o horário <b>$Horario</b> da linha <b>$Nome</b> de <b>$DescDia</b></p>";
     echo "<p></p>";
     echo "<form action=\"update.php\" method=\"get\">";
     echo "<input type=\"hidden\" name=\"codhor\" value=\"$CodHor\">";
     echo "<label>Novo Horário: <input type=\"time\" name=\"newhorario\" autofocus></label>";
+    echo "&nbsp;&nbsp;&nbsp;<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"elevador\" value=\"1\" ";
+    echo ($Elevador == 1) ? "checked" : "";
+    echo ">Elevador</label>";
+
     echo "<br>";
-    echo "<button type=\"sumbit\">ALTERAR</button></a>";
-    echo "<a href=\"admin.php?linha=$CodLin\"><button type=\"button\">< Voltar</button></a>";
+    echo"<button type= submit class=btn btn-lg btn-defalt>Alterar</button>";
+    echo"&nbsp &nbsp &nbsp";
+    echo "<a href=\"admin.php?linha=$CodLin\"><button type= submit class=btn btn-lg btn-defalt>&nbspVoltar&nbsp</button></a>";
     echo "</form>";
   }else{
     $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodHor = '$CodHor';");
       while ($linha = mysqli_fetch_array($resultado)){
         $CodLin = $linha["CodLin"];
       }
-    mysqli_query($con,"UPDATE thorario SET Horario = '$Newhorario' WHERE CodHor = '$CodHor';");
-    ?><h3>Alterado!</h3>
+
+    mysqli_query($con,"UPDATE thorario SET Horario = '$Newhorario', Elevador = '$Elevador' WHERE CodHor = '$CodHor';");
+    ?>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Horário alterado com sucesso.
+    </div>
     <?php
-      
+
       $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodHor = '$CodHor';");
         while ($linha = mysqli_fetch_array($resultado)){
           $Horario = $linha["Horario"];
           $CodHor = $linha["CodHor"];
           $CodLin = $linha["CodLin"];
           $CodDia = $linha["CodDia"];
-        
+
           echo "<p>Novo horário <b>$Horario</b>!</p>";
         }
 
     ?>
-      <a href="admin.php?linha=<?php echo $CodLin; ?>"><button type="button">< Voltar</button></a>
+
+      <a href="admin.php?linha=<?php echo $CodLin; ?>"><button type="button" class="btn btn-default">Voltar</button/a>
     <?php
   }
     ?>
+           </p>
+          </div>
+        </div>
+     </div>
 </body>
 </html>
 <?php

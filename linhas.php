@@ -19,7 +19,13 @@ if(isset($_GET['linha'])){
   <title>Horário <?php echo $Linha; ?></title>
 </head>
 <body>
-  <div class="all">
+    <div class="tudo">
+        <div class="all">
+    <div class="blank-space">
+      <h2 class=""></h2>
+    </div>
+        <div class="select-linhas">
+    <br>
   <form method="get" action="linhas.php">
     <div class="select-linhas">
       <select name="linha">
@@ -34,7 +40,7 @@ if(isset($_GET['linha'])){
         <option value="<?php echo "$CodLin"; ?>"><?php echo "$Nome"; ?></option>
         <?php } ?>
       </select>
-        <button type="submit" class="btn btn-lg btn-success">Pesquisar</button>
+        <button type="submit" class="btn btn-lg btn-default">Pesquisar</button>
     </div>
     <div class="radio-dias">
         <?php

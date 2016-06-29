@@ -34,7 +34,11 @@ if(isset($_GET['novonome'])){
   <title>Alterar tarifa</title>
 </head>
 <body>
-  <div class="all">
+    <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo</h2>
+    </div>
+        <div class="select-linhas">
     <br>
 <?php
   if($Ok == 'false'){
@@ -58,9 +62,12 @@ if(isset($_GET['novonome'])){
   }
   }else{
     mysqli_query($con,"UPDATE tempresa SET Nome = '$NovoNome' WHERE CodEmp = '$CodEmp';");
-    ?><h3>Alterado!</h3>
-
-      <a href="panel.php?menu=7"><button type="button">< Voltar</button></a>
+    ?>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Empresa alterada com sucesso. 
+    </div>
+        <a href="panel.php?menu=7"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+          
     <?php
   }
     ?>

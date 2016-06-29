@@ -38,23 +38,34 @@ if(isset($_GET['ok'])){
   <title>Cadastro: <?php echo "$Novalinha"; ?></title>
 </head>
 <body>
-  <div class="all">
+  <div class="tudo">
+    <div class="blank-space">
+      <h2 class="">Painel administrativo - Horários</h2>
+    </div>
     <br>
+    <div class="select-linhas">
 <?php
   if($Ok == ''){
-    echo "<h2>Deseja incluir o ônibus de placa <b>$Placa</b>, ano <b>$Ano</b>?</h2><br>";
+    echo "<p <b>Deseja incluir o ônibus de placa <b>$Placa</b>, ano <b>$Ano</b>?</p><br>";
     ?>
-      <a href="panel.php?menu=6"><button type="button">< Voltar</button></a>
-      <a href="novo_bus.php?placa=<?php echo "$Placa"; ?>&ano=<?php echo "$Ano"; ?>&elevador=<?php echo "$Elevador"; ?>&ar=<?php echo "$Ar"; ?>&ok=ok"><button type="button">Incluir</button></a>
+             
+           <a href="panel.php?menu=6"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
+      <a href="novo_bus.php?placa=<?php echo "$Placa"; ?>&ano=<?php echo "$Ano"; ?>&elevador=<?php echo "$Elevador"; ?>&ar=<?php echo "$Ar"; ?>&ok=ok"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button>
+          
 <?php
   }else{
     mysqli_query($con,"INSERT into tonibus(Placa, Ano, Elevador, Ar) Values ('$Placa','$Ano','$Elevador','$Ar')");
-    ?><h3>Inserido!</h3>
+    ?>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Ônibus incluido com sucesso.
+    </div>
 
-      <a href="panel.php?menu=6"><button type="button">< Voltar</button></a>
+      <a href="panel.php?menu=6"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
     <?php
   }
     ?>
+          </div>
+    </div>
 </body>
 </html>
 <?php

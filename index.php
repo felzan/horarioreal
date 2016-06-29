@@ -1,4 +1,4 @@
-<?php   
+<?php
 require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['linha'])){
@@ -16,10 +16,21 @@ if(isset($_GET['linha'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <title>Horário <?php echo $Linha; ?></title>
 </head>
 <body>
-  <div class="all">
+
+    <div class="tudo">
+        <div class="img">
+            <br><br>
+            <a href="#">
+                <img src="bus.png" alt="Fjords" width="100" height="94"></a>
+        <h2 class="nomeempresa">&nbsp;&nbsp;&nbsp;Empresa de Ônibus</h2>
+
+        </div>
+      <div class="all">
     <form method="get" action="index.php">
       <div class="select-linhas">
         <select name="linha">
@@ -34,40 +45,43 @@ if(isset($_GET['linha'])){
           <option value="<?php echo "$CodLin"; ?>"><?php echo "$Nome"; ?></option>
           <?php } ?>
         </select>
-          <button type="submit" class="btn btn-lg btn-success">Mostrar</button>
+          <button type="submit" class="btn btn-lg btn-defalt">Mostrar</button>
       </div>
     </form>
-
-    <br>
-    <hr>
-    <h2>
+          <br>
+    <h3 class="textos">
     <?php
       #Mostra nome da linha
       $resultado = mysqli_query($con,"SELECT Nome FROM tlinha where CodLin = '$Linha';");
-      
       while ($linha = mysqli_fetch_array($resultado)){
         $NomeLinha = $linha["Nome"];
+        echo "Linha: ";
         echo "$NomeLinha";
       }
     ?>
 
-    </h2>
+    </h3>
     <br>
     <?php
     // Se nenhuma linha selecionada, não mostra nada
-    if(strcmp($Linha,'') == 0){ 
+    if(strcmp($Linha,'') == 0){
       echo "$linha";
     }else{
     ?>
-    <div class="dias">
-      <input type="radio" name="dia" id="chk1" class="chkbox1" checked="checked"></input>
-      <label for="chk1">Seg-Sex</label>
-      <input type="radio" name="dia" id="chk2" class="chkbox2"></input>
-      <label for="chk2">Sábado</label>
-      <input type="radio" name="dia" id="chk3" class="chkbox3"></input>
-      <label for="chk3">Domingo</label>
 
-      <div class="horario">
+    <div class="dias">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#home">Seg-Sex</a>
+        </li>
+         <li>
+             <a data-toggle="tab" href="#menu1">Sábado</a>
+        </li>
+         <li>
+             <a data-toggle="tab" href="#menu2">Domingo/feriado</a>
+        </li>
+    </ul>
+
             <?php
               $manha = "04:00";
               $Ameio = "11:59";
@@ -76,13 +90,14 @@ if(isset($_GET['linha'])){
               $tarde = "18:00";
               $noite = "23:59";
             ?>
-      <br>
-        <div class="box" id="chkbox1">
+
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active">
+          <div class="box" id="chkbox1">
           <div class="turnos">
             <div class="manha">
               <?php
-                #Lista horarios MANHA
-                # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
+
                 $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$manha' AND '$Ameio' order by Horario;");
                 $manha = mysqli_real_escape_string($con,$manha);
                 $Ameio = mysqli_real_escape_string($con,$Ameio);
@@ -121,7 +136,9 @@ if(isset($_GET['linha'])){
             </div>
           </div>
         </div>
-        <div class="box" id="chkbox2">
+      </div>
+      <div id="menu1" class="tab-pane fade">
+          <div class="box" id="chkbox2">
           <div class="turnos">
             <div class="manha">
               <?php
@@ -165,7 +182,9 @@ if(isset($_GET['linha'])){
             </div>
           </div>
         </div>
-        <div class="box" id="chkbox3">
+      </div>
+      <div id="menu2" class="tab-pane fade">
+<div class="box" id="chkbox3">
           <div class="turnos">
             <div class="manha">
               <?php
@@ -211,7 +230,9 @@ if(isset($_GET['linha'])){
         </div>
       </div>
     </div>
+    </div>
   </div>
+</div>
 <?php
 }
 ?>
