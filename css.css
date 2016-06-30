@@ -83,14 +83,11 @@ div.horario{
   width: 100%;
   display: inline-flex;
 }
-div.horario i{
+div.horario i, div.turnos i{
   font-size: 15px;
   color: darkblue;
   margin: 0 1px;
 
-}
-div.horario i.accessible{
-  margin: 0 6px;
 }
 div.box{
   text-align: center;
@@ -191,4 +188,7 @@ input{
 }
 table.table tr:first-child{
   font-weight: bold;
+}
+div.rodape{
+  height: 30px;
 }

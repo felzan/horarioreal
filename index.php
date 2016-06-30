@@ -104,7 +104,11 @@ if(isset($_GET['linha'])){
                 while ($linha = mysqli_fetch_array($resultado)){
                   $Horario = $linha["Horario"];
                   $Horario = date('H:i',strtotime($Horario));
-                  echo "<i class=\"material-icons\">accessible</i>$Horario<br>";
+                  $Elevador = $linha["Elevador"];
+                  if ($Elevador == 1) {
+                    echo "<i class=\"accessible material-icons\">accessible</i>";
+                  }
+                  echo "$Horario<br>";
                 }
               ?>
             </div>
@@ -231,6 +235,8 @@ if(isset($_GET['linha'])){
       </div>
     </div>
     </div>
+  </div>
+  <div class="rodape">
   </div>
 </div>
 <?php
