@@ -1,4 +1,4 @@
-  <?php
+<?php
 require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['linha'])){
@@ -10,8 +10,7 @@ global $CodLin;
 if(isset($_GET['novonome'])){
   $Novonome = $_GET['novonome'];
   $Novonomelinha = $_GET['novonomelinha'];
-  $Novonomeabr = $_GET['novonomeabr'];
-  mysqli_query($con,"UPDATE tlinha SET Nome = '$Novonome', AbrLin = '$Novonomeabr' WHERE CodLin = '$Novonomelinha';");
+  mysqli_query($con,"UPDATE tlinha SET Nome = '$Novonome' WHERE CodLin = '$Novonomelinha';");
 }
 ?>
 
@@ -23,6 +22,9 @@ if(isset($_GET['novonome'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
+
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <title>Horário <?php echo $Linha; ?></title>
 </head>
 <div class="tudo">
@@ -76,12 +78,11 @@ if(isset($_GET['novonome'])){
             </form>
     <br><br>
     <form action="novo_horario.php" method="get">
-              <input type="hidden" name="linha" class="form-control" value="<?php echo $Linha; ?>">
+        <input type="hidden" name="linha" class="form-control" value="<?php echo $Linha; ?>">
+
+        <p><label>Novo Horário: <input type="time" name="novohorario" class="form-control" ></label></p>
 
         <label class="checkbox-inline"><input type="checkbox" name="elevador" value="1">Elevador</label>&nbsp;
-
-        <label>Novo Horário: <input type="time" name="novohorario" class="form-control" ></label>
-
 
         <label class="checkbox-inline"><input type="checkbox" name="dia" value="1">Seg-Sex</label>&nbsp;
 
@@ -112,14 +113,6 @@ if(isset($_GET['novonome'])){
     <?php
     }else{
     ?>
-    <div class="dias">
-      <input type="radio" name="dia" id="chk1" class="chkbox1" checked="checked"></input>
-      <label for="chk1">Seg-Sex</label>
-      <input type="radio" name="dia" id="chk2" class="chkbox2"></input>
-      <label for="chk2">Sábado</label>
-      <input type="radio" name="dia" id="chk3" class="chkbox3"></input>
-      <label for="chk3">Domingo</label>
-
       <div class="horario">
         <?php
           $manha = "04:00";
@@ -130,203 +123,233 @@ if(isset($_GET['novonome'])){
           $noite = "23:59";
         ?>
       <br>
-        <div class="box" id="chkbox1">
-          <div class="turnos">
-            <div class="manha">
-              <?php
-                #Lista horarios MANHA
-                # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$manha' AND '$Ameio' order by Horario;");
-                $manha = mysqli_real_escape_string($con,$manha);
-                $Ameio = mysqli_real_escape_string($con,$Ameio);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
-                  }
-                  echo "$Horario";
+    <div class="dias">
 
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-            <div class="tarde">
-              <?php
-                #Lista horarios TARDE
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$meio' AND '$Atarde' order by Horario;");
-                $meio = mysqli_real_escape_string($con,$meio);
-                $Atarde = mysqli_real_escape_string($con,$Atarde);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#home">Seg-Sex</a>
+        </li>
+         <li>
+             <a data-toggle="tab" href="#menu1">Sábado</a>
+        </li>
+         <li>
+             <a data-toggle="tab" href="#menu2">Domingo/feriado</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+          <div class="box" id="chkbox1">
+            <div class="turnos">
+              <div class="manha">
+                <?php
+                  #Lista horarios MANHA
+                  # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$manha' AND '$Ameio' order by Horario;");
+                  $manha = mysqli_real_escape_string($con,$manha);
+                  $Ameio = mysqli_real_escape_string($con,$Ameio);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
                   }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-            <div class="noite">
-              <?php
-                #Lista horarios NOITE
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$tarde' AND '$noite' order by Horario;");
-                $tarde = mysqli_real_escape_string($con,$tarde);
-                $noite = mysqli_real_escape_string($con,$noite);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
+                ?>
+              </div>
+              <div class="tarde">
+                <?php
+                  #Lista horarios TARDE
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$meio' AND '$Atarde' order by Horario;");
+                  $meio = mysqli_real_escape_string($con,$meio);
+                  $Atarde = mysqli_real_escape_string($con,$Atarde);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
                   }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
+                ?>
+              </div>
+              <div class="noite">
+                <?php
+                  #Lista horarios NOITE
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 1 AND Horario BETWEEN '$tarde' AND '$noite' order by Horario;");
+                  $tarde = mysqli_real_escape_string($con,$tarde);
+                  $noite = mysqli_real_escape_string($con,$noite);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
+                  }
+                ?>
+              </div>
             </div>
           </div>
         </div>
-        <div class="box" id="chkbox2">
-          <div class="turnos">
-            <div class="manha">
-              <?php
-                #Lista horarios MANHA
-                # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 2 AND Horario BETWEEN '$manha' AND '$meio' order by Horario;");
-                $manha = mysqli_real_escape_string($con,$manha);
-                $meio = mysqli_real_escape_string($con,$meio);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
+        <div id="menu1" class="tab-pane fade">
+          <div class="box" id="chkbox2">
+            <div class="turnos">
+              <div class="manha">
+                <?php
+                  #Lista horarios MANHA
+                  # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 2 AND Horario BETWEEN '$manha' AND '$meio' order by Horario;");
+                  $manha = mysqli_real_escape_string($con,$manha);
+                  $meio = mysqli_real_escape_string($con,$meio);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
                   }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-            <div class="tarde">
-              <?php
-                #Lista horarios TARDE
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 2 AND Horario BETWEEN '$meio' AND '$tarde' order by Horario;");
-                $meio = mysqli_real_escape_string($con,$meio);
-                $tarde = mysqli_real_escape_string($con,$tarde);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
+                ?>
+              </div>
+              <div class="tarde">
+                <?php
+                  #Lista horarios TARDE
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 2 AND Horario BETWEEN '$meio' AND '$tarde' order by Horario;");
+                  $meio = mysqli_real_escape_string($con,$meio);
+                  $tarde = mysqli_real_escape_string($con,$tarde);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
                   }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-            <div class="noite">
-              <?php
-                #Lista horarios NOITE
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 2 AND Horario BETWEEN '$tarde' AND '$noite' order by Horario;");
-                $tarde = mysqli_real_escape_string($con,$tarde);
-                $noite = mysqli_real_escape_string($con,$noite);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
+                ?>
+              </div>
+              <div class="noite">
+                <?php
+                  #Lista horarios NOITE
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 2 AND Horario BETWEEN '$tarde' AND '$noite' order by Horario;");
+                  $tarde = mysqli_real_escape_string($con,$tarde);
+                  $noite = mysqli_real_escape_string($con,$noite);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
                   }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-          </div>
-        </div>
-        <div class="box" id="chkbox3">
-          <div class="turnos">
-            <div class="manha">
-              <?php
-                #Lista horarios MANHA
-                # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 3 AND Horario BETWEEN '$manha' AND '$meio' order by Horario;");
-                $manha = mysqli_real_escape_string($con,$manha);
-                $meio = mysqli_real_escape_string($con,$meio);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
-                  }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-            <div class="tarde">
-              <?php
-                #Lista horarios TARDE
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 3 AND Horario BETWEEN '$meio' AND '$tarde' order by Horario;");
-                $meio = mysqli_real_escape_string($con,$meio);
-                $tarde = mysqli_real_escape_string($con,$tarde);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
-                  }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
-            </div>
-            <div class="noite">
-              <?php
-                #Lista horarios NOITE
-                $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 3 AND Horario BETWEEN '$tarde' AND '$noite' order by Horario;");
-                $tarde = mysqli_real_escape_string($con,$tarde);
-                $noite = mysqli_real_escape_string($con,$noite);
-                while ($linha = mysqli_fetch_array($resultado)){
-                  $CodHor = $linha["CodHor"];
-                  $Horario = $linha["Horario"];
-                  $Horario = date('H:i',strtotime($Horario));
-                  $Elevador = $linha["Elevador"];
-                  if ($Elevador == 1) {
-                    echo "<i class=\"accessible material-icons\">accessible</i>";
-                  }
-                  echo "$Horario";
-                  echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
-                  echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
-                }
-              ?>
+                ?>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <div id="menu2" class="tab-pane fade">
+          <div class="box" id="chkbox3">
+            <div class="turnos">
+              <div class="manha">
+                <?php
+                  #Lista horarios MANHA
+                  # SELECT * FROM `thorario` WHERE `CodLin` = 3 AND `CodDia` = 1 AND `Horario` BETWEEN '04:00' AND '12:00'
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 3 AND Horario BETWEEN '$manha' AND '$meio' order by Horario;");
+                  $manha = mysqli_real_escape_string($con,$manha);
+                  $meio = mysqli_real_escape_string($con,$meio);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
+                  }
+                ?>
+              </div>
+              <div class="tarde">
+                <?php
+                  #Lista horarios TARDE
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 3 AND Horario BETWEEN '$meio' AND '$tarde' order by Horario;");
+                  $meio = mysqli_real_escape_string($con,$meio);
+                  $tarde = mysqli_real_escape_string($con,$tarde);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
+                  }
+                ?>
+              </div>
+              <div class="noite">
+                <?php
+                  #Lista horarios NOITE
+                  $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodLin = '$Linha' AND CodDia = 3 AND Horario BETWEEN '$tarde' AND '$noite' order by Horario;");
+                  $tarde = mysqli_real_escape_string($con,$tarde);
+                  $noite = mysqli_real_escape_string($con,$noite);
+                  while ($linha = mysqli_fetch_array($resultado)){
+                    $CodHor = $linha["CodHor"];
+                    $Horario = $linha["Horario"];
+                    $Horario = date('H:i',strtotime($Horario));
+                    $Elevador = $linha["Elevador"];
+                    if ($Elevador == 1) {
+                      echo "<i class=\"accessible material-icons\">accessible</i>";
+                    }
+                    echo "$Horario";
+                    echo "<a href=\"delete.php?codhor=$CodHor&del=false\"><i class=\"delete material-icons\">delete</i></a>";
+                    echo "<a href=\"update.php?codhor=$CodHor\"><i class=\"edit material-icons\">edit</i></a><br>";
+                  }
+                ?>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!--<div class="dias">
+      <input type="radio" name="dia" id="chk1" class="chkbox1" checked="checked"></input>
+      <label for="chk1">Seg-Sex</label>
+      <input type="radio" name="dia" id="chk2" class="chkbox2"></input>
+      <label for="chk2">Sábado</label>
+      <input type="radio" name="dia" id="chk3" class="chkbox3"></input>
+      <label for="chk3">Domingo</label>
+      </div> -->
     </div>
   </div>
 <?php
