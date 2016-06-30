@@ -30,8 +30,7 @@ if(isset($_GET['ok'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
-    <title>Painel administrativo - Novo motorista</title>
-  <title>Cadastro: <?php echo "$Novalinha"; ?></title>
+  <title>Cadastro de motorista</title>
 </head>
 <body>
 <div class="tudo">
@@ -42,11 +41,20 @@ if(isset($_GET['ok'])){
     <div class="select-linhas">
 <?php
   if($Ok == ''){
+    if(empty($Nome) OR empty($CPF) OR empty($CNH)){
+    echo "<p>Nenhum campo pode estar vazio</p><br>";
+    ?>
+    <a href="panel.php?menu=5"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
+
+    <?php
+
+    }else{
     echo "<p <b>Deseja incluir o motorista: <b>$Nome</b> de CPF:<b>$CPF</b> e de CNH:<b>$CNH</b> ?</p><br>";
     ?>
       <a href="panel.php?menu=5"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
       <a href="novo_motorista.php?nome=<?php echo "$Nome"; ?>&CPF=<?php echo "$CPF"; ?>&CNH=<?php echo "$CNH"; ?>&ok=ok"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button>
 <?php
+    }
   }else{
     mysqli_query($con,"INSERT into tmotorista(Nome, CPF, CNH) Values ('$Nome','$CPF','$CNH')");
     ?>

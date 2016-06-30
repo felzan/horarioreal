@@ -20,7 +20,7 @@ if(isset($_GET['ok'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
-  <title>Cadastro: <?php echo "$Novalinha"; ?></title>
+  <title>Cadastro de cidade</title>
 </head>
 <body>
     <div class="tudo">
@@ -31,11 +31,19 @@ if(isset($_GET['ok'])){
     <div class="select-linhas">
 <?php
   if($Ok == ''){
-    echo "<p <b>Deseja incluir a cidade: <b>$Novacidade</b>?</p><br>";
+    if(empty($Novacidade)){
+    echo "<p>Cidade não esta vazia</p><br>";
     ?>
-           <a href="panel.php?menu=8"><button type=" button" class="btn btn-lg btn-defalt">Voltar</button>
+      <a href="panel.php?menu=8"><button type=" button" class="btn btn-lg btn-defalt">Voltar</button>
+    <?php
+    }else {
+    echo "<p> <b>Deseja incluir a cidade: <b>$Novacidade</b>?</p><br>";
+
+    ?>
+      <a href="panel.php?menu=8"><button type=" button" class="btn btn-lg btn-defalt">Voltar</button>
       <a href="nova_cidade.php?novacidade=<?php echo "$Novacidade"; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button>
 <?php
+    }
   }else{
     mysqli_query($con,"INSERT into tcidade(Nome) Values ('$Novacidade')");
     ?>

@@ -20,7 +20,7 @@ if(isset($_GET['ok'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
-  <title>Cadastro: <?php echo "$Novalinha"; ?></title>
+  <title>Cadastro de empresa</title>
 </head>
 <body>
     <div class="tudo">
@@ -31,11 +31,20 @@ if(isset($_GET['ok'])){
     <div class="select-linhas">
 <?php
   if($Ok == ''){
+    if(empty($Novaemp)){
+    echo "<p>Nome da empresa não pode estar vazio</p><br>";
+    ?>
+    <a href="panel.php?menu=7"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+
+    <?php
+    }else {
+
     echo "<p <b>Deseja incluir a empresa <b>$Novaemp</b>?</p><br>";
     ?>
       <a href="panel.php?menu=7"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
       <a href="nova_empresa.php?novaemp=<?php echo "$Novaemp"; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button></a>
 <?php
+    }
   }else{
     mysqli_query($con,"INSERT into tempresa(Nome) Values ('$Novaemp')");
     ?>

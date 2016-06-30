@@ -264,11 +264,9 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="novo_bus.php" method="get" accept-charset="utf-8">
-                      <div class="form-group"><input type="text" placeholder="Nome"class="form-control" id="usr"></div>&nbsp&nbsp
-
         <div class="form-group"><input type="text" name="placa" placeholder="Placa"class="form-control" id="usr"></div>&nbsp&nbsp
 
-                    <div class="form-group"><input type="number" name="ano" placeholder="Ano" class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><input type="number" min="0" name="ano" placeholder="Ano" class="form-control" id="usr"></div>&nbsp&nbsp
 
 <label>Elevador:&nbsp</label><input type="checkbox" name="elevador" value="1">&nbsp&nbsp
                     <label>Ar:&nbsp</label><input type="checkbox" name="ar" value="1">&nbsp&nbsp

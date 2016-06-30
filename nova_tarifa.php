@@ -41,11 +41,15 @@ if(isset($_GET['ok'])){
     <div class="select-linhas">
 <?php
   if($Ok == ''){
-    echo "<p <b>Deseja incluir a tarifa <b>$Novatarifa</b> na empresa <b>$Novatarifaemp</b> com o valor <b>$Novatarifavalor</b> ?</p><br>";
-    ?> 
+    if(empty($Novatarifaemp) OR empty($Novatarifa) OR empty($Novatarifavalor)){
+      echo "<p>Nenhum valor pode estar vazio</p><br>";
+    }else{
+      echo "<p> <b>Deseja incluir a tarifa <b>$Novatarifa</b> na empresa <b>$Novatarifaemp</b> com o valor <b>$Novatarifavalor</b> ?</p><br>";
+    ?>
       <a href="panel.php?menu=3"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
      <a href="nova_tarifa.php?novatarifaemp=<?php echo "$Novatarifaemp"; ?>&novatarifa=<?php echo "$Novatarifa"; ?>&novatarifavalor=<?php echo "$Novatarifavalor"; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button>
 <?php
+    }
   }else{
     mysqli_query($con,"INSERT into ttarifa(CodEmp, Nome, Preco) Values ('$Novatarifaemp','$Novatarifa','$Novatarifavalor')");
     ?>

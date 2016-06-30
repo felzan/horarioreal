@@ -46,11 +46,19 @@ if(isset($_GET['ok'])){
     <div class="select-linhas">
 <?php
   if($Ok == ""){
-    echo "<p <b>Deseja incluir o horário $Novohorario no dia $Novohorario_dia na linha $Novohorario_linha ?</b></p><br>";
+    if(empty($Novohorario) OR empty($Novohorario_dia) OR empty($Novohorario_linha)){
+    echo "<p>Horário e dia não podem estar vazios</p><br>";
+    ?>
+      <a href="admin.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
+    <?php
+    }else {
+      echo "<p <b>Deseja incluir o horário $Novohorario no dia $Novohorario_dia na linha $Novohorario_linha ?</b></p><br>";
+
     ?>
       <a href="admin.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
       <a href="novo_horario.php?linha=<?php echo "$Novohorario_linha"; ?>&novohorario=<?php echo "$Novohorario"; ?>&dia=<?php echo "$Novohorario_dia"; ?>&elevador=<?php echo "$Elevador"; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button></a>
 <?php
+    }
   }else{
     mysqli_query($con,"INSERT into thorario(Horario, CodDia, CodLin, Elevador) Values ('$Novohorario','$Novohorario_dia','$Novohorario_linha', '$Elevador')");
     ?>

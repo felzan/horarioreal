@@ -25,7 +25,7 @@ if(isset($_GET['ok'])){
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css.css">
-  <title>Cadastro: <?php echo "$Novalinha"; ?></title>
+  <title>Cadastro de linha ?></title>
 </head>
 <body>
     <div class="tudo">
@@ -36,11 +36,19 @@ if(isset($_GET['ok'])){
     <div class="select-linhas">
 <?php
   if($Ok == ""){
+    if(empty($Novalinha)){
+      echo "<p>Nome da linha não pode estar vazio</p><br>";
+      ?>
+      <a href="admin.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
+      <?php
+    }
+    else{
     echo "<p <b>Deseja incluir a linha ".$Novalinha." ?</b></p><br>";
     ?>
       <a href="admin.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
       <a href="nova_linha.php?novalinha=<?php echo "$Novalinha"; ?>&novalinhaabr=<?php echo $Novalinhaabr; ?>&ok=true"><button type=" submit" class="btn btn-lg btn-defalt">Incluir</button></a>
 <?php
+    }
   }else{
     mysqli_query($con,"INSERT into tlinha(Nome,AbrLin) Values ('$Novalinha','$Novalinhaabr')");
     ?>
