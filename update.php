@@ -71,8 +71,9 @@ global $DescDia;
     echo "<br>";
     echo"<button type= submit class=btn btn-lg btn-defalt>Alterar</button>";
     echo"&nbsp &nbsp &nbsp";
-    echo "<a href=\"admin.php?linha=$CodLin\"><button type= submit class=btn btn-lg btn-defalt>&nbspVoltar&nbsp</button></a>";
     echo "</form>";
+    echo "<br>";
+    echo "<a href=\"admin.php?linha=$CodLin\"><button type= submit class=btn btn-lg btn-defalt>&nbspVoltar&nbsp</button></a>&nbsp&nbsp&nbsp&nbsp";
   }else{
     $resultado = mysqli_query($con,"SELECT * FROM thorario WHERE CodHor = '$CodHor';");
       while ($linha = mysqli_fetch_array($resultado)){

@@ -1,4 +1,4 @@
-<?php
+  <?php
 require("conetion.php");
 #$con = conexao() or die ("Banco de dados não está acessível");
 if(isset($_GET['linha'])){
@@ -10,7 +10,8 @@ global $CodLin;
 if(isset($_GET['novonome'])){
   $Novonome = $_GET['novonome'];
   $Novonomelinha = $_GET['novonomelinha'];
-  mysqli_query($con,"UPDATE tlinha SET Nome = '$Novonome' WHERE CodLin = '$Novonomelinha';");
+  $Novonomeabr = $_GET['novonomeabr'];
+  mysqli_query($con,"UPDATE tlinha SET Nome = '$Novonome', AbrLin = '$Novonomeabr' WHERE CodLin = '$Novonomelinha';");
 }
 ?>
 
