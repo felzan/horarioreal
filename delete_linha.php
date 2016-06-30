@@ -42,6 +42,8 @@ global $CodLin;
 
 
     echo "<p>Deseja deletar a linha <b>$Nome</b></p>";
+    echo "</br>";
+    echo "<p>Todos os horários relacionados a esta linha também serão excluídos!</p>";
     echo "<a href=\"delete_linha.php?codlin=$CodLin&del=true\"><button type=\"button\">DELETAR</button></a>";
     echo "<a href=\"admin.php?linha=$CodLin\"><button type=\"button\">< Voltar</button></a>";
 
@@ -54,7 +56,7 @@ global $CodLin;
     mysqli_query($con,"DELETE FROM thorario WHERE CodLin = '$CodLin';");
     ?>
     <div class="alert alert-success">
-        <strong>Success!</strong> Linha exclúida com sucesso. 
+        <strong>Success!</strong> Linha exclúida com sucesso.
     </div>
         <a href="panel.php"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
     <?php
