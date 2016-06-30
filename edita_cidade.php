@@ -52,7 +52,7 @@ if(isset($_GET['novonome'])){
         $Nome = $linha["Nome"];
       ?>
       <input type="hidden" name="codcid" value="<?php echo $CodCid; ?>">
-      <label>Nome: </label><input type="text" name="novonome" value="<?php echo $Nome; ?>">
+      <label>Nome: </label><input type="text" required name="novonome" value="<?php echo $Nome; ?>">
       <br>
       <input type="submit" name="" value="OK">
     </form>
@@ -64,10 +64,10 @@ if(isset($_GET['novonome'])){
     mysqli_query($con,"UPDATE tcidade SET Nome = '$NovoNome' WHERE CodCid = '$CodCid';");
     ?>
     <div class="alert alert-success">
-        <strong>Success!</strong> Cidade alterada com sucesso. 
+        <strong>Success!</strong> Cidade alterada com sucesso.
     </div>
         <a href="panel.php?menu=8"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
-          
+
     <?php
   }
     ?>

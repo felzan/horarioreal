@@ -76,11 +76,11 @@ if(isset($_GET['novocnh'])){
         $CNH = $linha["CNH"];
       ?>
       <input type="hidden" name="codmot" value="<?php echo $CodMot; ?>">
-      <label>CPF: </label><input type="text" name="novocpf" value="<?php echo $CPF; ?>">
+      <label>CPF: </label><input type="text" required name="novocpf" value="<?php echo $CPF; ?>">
       <br>
-      <label>Nome: </label><input type="text" name="novonome" value="<?php echo $Nome; ?>">
+      <label>Nome: </label><input type="text" required name="novonome" value="<?php echo $Nome; ?>">
       <br>
-      <label>CNH: </label><input type="text" name="novocnh" value="<?php echo $CNH; ?>">
+      <label>CNH: </label><input type="text" required name="novocnh" value="<?php echo $CNH; ?>">
       <br>
       <input type="submit" name="" value="OK">
     </form>
@@ -92,10 +92,10 @@ if(isset($_GET['novocnh'])){
     mysqli_query($con,"UPDATE tmotorista SET CPF = '$NovoCPF', Nome = '$NovoNome', CNH = '$NovoCNH' WHERE CodMot = '$CodMot';");
     ?>
         <div class="alert alert-success">
-        <strong>Success!</strong> Motorista alterado com sucesso. 
+        <strong>Success!</strong> Motorista alterado com sucesso.
     </div>
         <a href="panel.php?menu=5"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
-        
+
     <?php
   }
     ?>

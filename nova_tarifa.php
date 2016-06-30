@@ -43,6 +43,9 @@ if(isset($_GET['ok'])){
   if($Ok == ''){
     if(empty($Novatarifaemp) OR empty($Novatarifa) OR empty($Novatarifavalor)){
       echo "<p>Nenhum valor pode estar vazio</p><br>";
+      ?>
+        <a href="panel.php?menu=3"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button>
+      <?php
     }else{
       echo "<p> <b>Deseja incluir a tarifa <b>$Novatarifa</b> na empresa <b>$Novatarifaemp</b> com o valor <b>$Novatarifavalor</b> ?</p><br>";
     ?>

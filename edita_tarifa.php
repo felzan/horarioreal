@@ -75,11 +75,11 @@ if(isset($_GET['novopreco'])){
         $Preco = $linha["Preco"];
       ?>
       <input type="hidden" name="codtar" value="<?php echo $CodTar; ?>">
-      <label>Cód Emp: </label><input type="text" name="novocodemp" value="<?php echo $CodEmp; ?>">
+      <label>Cód Emp: </label><input type="text" required name="novocodemp" value="<?php echo $CodEmp; ?>">
       <br>
-      <label>Nome: </label><input type="text" name="novonome" value="<?php echo $Nome; ?>">
+      <label>Nome: </label><input type="text" required name="novonome" value="<?php echo $Nome; ?>">
       <br>
-      <label>Preço: </label><input type="text" name="novopreco" value="<?php echo $Preco; ?>">
+      <label>Preço: </label><input type="text" required name="novopreco" value="<?php echo $Preco; ?>">
       <br>
       <input type="submit" name="" value="OK">
     </form>
@@ -91,7 +91,7 @@ if(isset($_GET['novopreco'])){
     mysqli_query($con,"UPDATE ttarifa SET CodEmp = '$NovoCodEmp', Nome = '$NovoNome', Preco = '$NovoPreco' WHERE CodTar = '$Codtar';");
     ?>
           <div class="alert alert-success">
-        <strong>Success!</strong> Tarefa alterada com sucesso. 
+        <strong>Success!</strong> Tarefa alterada com sucesso.
     </div>
         <a href="panel.php?menu=3"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
     <?php

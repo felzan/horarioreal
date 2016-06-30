@@ -86,9 +86,9 @@ if(isset($_GET['novoar'])){
         $Ar = $linha["Ar"];
       ?>
       <input type="hidden" name="codbus" value="<?php echo $CodBus; ?>">
-      <label>Placa: </label><input type="text" name="novaplaca" value="<?php echo $Placa; ?>">
+      <label>Placa: </label><input type="text" required name="novaplaca" value="<?php echo $Placa; ?>">
       <br>
-      <label>Ano: </label><input type="number" min="1500" max="2100" name="novoano" value="<?php echo $Ano; ?>">
+      <label>Ano: </label><input type="number" min="1500" max="2100" required name="novoano" value="<?php echo $Ano; ?>">
       <br>
       <label>Elevador: </label><input type="checkbox" name="novoelevador" value="1" <?php if($Elevador){echo "checked";} ?>>
       <br>
@@ -102,12 +102,12 @@ if(isset($_GET['novoar'])){
   }
   }else{
     mysqli_query($con,"UPDATE tonibus SET Placa = '$NovaPlaca', Ano = '$NovoAno', Elevador = '$NovoElevador', Ar = '$NovoAr' WHERE CodBus = '$CodBus';");
-    ?>      
+    ?>
           <div class="alert alert-success">
-        <strong>Success!</strong> Ônibus alterado com sucesso. 
+        <strong>Success!</strong> Ônibus alterado com sucesso.
     </div>
         <a href="panel.php?menu=6"><button type=" submit" class="btn btn-lg btn-defalt">Voltar</button></a>
-          
+
     <?php
   }
     ?>

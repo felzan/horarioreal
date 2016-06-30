@@ -52,9 +52,9 @@ if(isset($_GET['menu'])){
 
                     <form class="novalinha" action="nova_linha.php" method="get" accept-charset="utf-8">
 
-    <div class="form-group"><input type="text" name="novalinha" placeholder="Nome da linha"class="form-control" id="usr"></div>&nbsp&nbsp
+    <div class="form-group"><input type="text" name="novalinha" required placeholder="Nome da linha"class="form-control" id="usr"></div>&nbsp&nbsp
 
-    <div class="form-group"><input type="text" name="novalinhaabr" placeholder="Abreviatura da linha" class="form-control" id="usr">
+    <div class="form-group"><input type="text" name="novalinhaabr" required placeholder="Abreviatura da linha" class="form-control" id="usr">
     </div>&nbsp&nbsp
 
          <div class="form-group"><input type="submit" name="Ok" value="OK" class="form-control" id="usr">
@@ -117,11 +117,26 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="nova_tarifa.php" method="get" accept-charset="utf-8">
-                    <div class="form-group"><input type="text" name="novatarifaemp" placeholder="Cód da empresa"class="form-control" id="usr"></div>&nbsp&nbsp
 
-                     <div class="form-group"><input type="text" name="novatarifa" placeholder="Nome da tarifa"class="form-control" id="usr"></div>&nbsp&nbsp
+                    <!--
+                    <div class="form-group"><input type="number" min="0" name="novatarifaemp" placeholder="Cód da empresa"class="form-control" id="usr"></div>&nbsp&nbsp
+                  -->
 
-                    <div class="form-group"><input type="text" name="novatarifavalor"placeholder="Valor"class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><select name="novatarifaemp" class="form-control" id="usr" placeholder="Empresa">
+                      <?php
+                        $resultado = mysqli_query($con,"SELECT * FROM tempresa;");
+                        while ($linha = mysqli_fetch_array($resultado)){
+                          $CodEmp = $linha["CodEmp"];
+                          $Nome = $linha["Nome"];
+                       ?>
+                      <option value="<?php echo $CodEmp; ?>"><?php echo $Nome; ?></option>
+                      <?php } ?>
+                    </select>
+                    </div>&nbsp&nbsp
+
+                     <div class="form-group"><input type="text" name="novatarifa" placeholder="Nome da tarifa" required class="form-control" id="usr"></div>&nbsp&nbsp
+
+                    <div class="form-group"><input type="number" min="2" max="10" step="any" required name="novatarifavalor" placeholder="Valor" class="form-control" id="usr"></div>&nbsp&nbsp
 
 
                      <div class="form-group"><input type="submit" value="OK"class="form-control" id="usr"></div>
@@ -198,11 +213,11 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="novo_motorista.php" method="get" accept-charset="utf-8">
-                    <div class="form-group"><input type="text" name="nome" placeholder="Nome"class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><input type="text" name="nome" required placeholder="Nome"class="form-control" id="usr"></div>&nbsp&nbsp
 
-                    <div class="form-group"><input type="text" name="CPF" placeholder="CPF"class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><input type="text" name="CPF" required placeholder="CPF"class="form-control" id="usr"></div>&nbsp&nbsp
 
-                     <div class="form-group"><input type="text" name="CNH" placeholder="CNH"class="form-control" id="usr"></div>&nbsp&nbsp
+                     <div class="form-group"><input type="text" name="CNH" required placeholder="CNH"class="form-control" id="usr"></div>&nbsp&nbsp
 
                     <div class="form-group"><input type="submit" value="OK" class="form-control" id="usr"></div>
                   </form>
@@ -264,9 +279,9 @@ if(isset($_GET['menu'])){
                 <div class="panel-heading">
                   <span>Incluir: </span>
                   <form class="novalinha" action="novo_bus.php" method="get" accept-charset="utf-8">
-        <div class="form-group"><input type="text" name="placa" placeholder="Placa"class="form-control" id="usr"></div>&nbsp&nbsp
+        <div class="form-group"><input type="text" name="placa" required placeholder="Placa"class="form-control" id="usr"></div>&nbsp&nbsp
 
-                    <div class="form-group"><input type="number" min="0" name="ano" placeholder="Ano" class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><input type="number" min="0" name="ano" required placeholder="Ano" class="form-control" id="usr"></div>&nbsp&nbsp
 
 <label>Elevador:&nbsp</label><input type="checkbox" name="elevador" value="1">&nbsp&nbsp
                     <label>Ar:&nbsp</label><input type="checkbox" name="ar" value="1">&nbsp&nbsp
@@ -336,7 +351,7 @@ if(isset($_GET['menu'])){
                   <span>Incluir: </span>
                   <form class="novalinha" action="nova_empresa.php" method="get" accept-charset="utf-8">
 
-                    <div class="form-group"><input type="text" name="novaemp"    placeholder="Nome da empresa" class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><input type="text" name="novaemp" required placeholder="Nome da empresa" class="form-control" id="usr"></div>&nbsp&nbsp
 
                     <div class="form-group"><input type="submit" name="" value="OK"class="form-control" id="usr"></div>
                   </form>
@@ -389,9 +404,9 @@ if(isset($_GET['menu'])){
                   <span>Incluir: </span>
                   <form class="novalinha" action="nova_cidade.php" method="get" accept-charset="utf-8">
 
-                    <div class="form-group"><input type="text" name="novacidade" placeholder="Nome da cidade"class="form-control" id="usr"></div>&nbsp&nbsp
+                    <div class="form-group"><input type="text" name="novacidade" required placeholder="Nome da cidade"class="form-control" id="usr"></div>&nbsp&nbsp
 
-                      <div class="form-group"><input type="submit" name="" value="OK" class="form-control" id="usr"></div>
+                      <div class="form-group"><input type="submit" name="" required value="OK" class="form-control" id="usr"></div>
                   </form>
                 </div>
 
